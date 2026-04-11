@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Prem Doba | Android Developer Portfolio</title>
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Google Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet">
+
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    /* Smooth Button Hover Animation */
+    .btn-animate {
+      transition: all 0.3s ease-in-out;
+    }
+
+    .btn-animate:hover {
+      transform: translateY(-3px) scale(1.03);
+      box-shadow: 0px 0px 25px rgba(99, 102, 241, 0.6);
+    }
+
+    /* Card hover effect */
+    .card-hover {
+      transition: all 0.3s ease-in-out;
+    }
+
+    .card-hover:hover {
+      transform: translateY(-5px);
+      border-color: rgba(99, 102, 241, 0.8);
+      box-shadow: 0px 0px 30px rgba(99, 102, 241, 0.2);
+    }
+  </style>
+</head>
+
+<body class="bg-gray-950 text-white">
+
+  <!-- Navbar -->
+  <nav class="fixed w-full top-0 z-50 bg-gray-950/70 backdrop-blur-lg border-b border-gray-800">
+    <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
+      <h1 class="text-xl font-bold text-indigo-400">Prem Doba</h1>
+
+      <ul class="hidden md:flex space-x-8 text-sm font-medium text-gray-200">
+        <li><a href="#home" class="hover:text-indigo-400 transition">Home</a></li>
+        <li><a href="#about" class="hover:text-indigo-400 transition">About</a></li>
+        <li><a href="#skills" class="hover:text-indigo-400 transition">Skills</a></li>
+        <li><a href="#projects" class="hover:text-indigo-400 transition">Projects</a></li>
+        <li><a href="#contact" class="hover:text-indigo-400 transition">Contact</a></li>
+      </ul>
+
+      <!-- Mobile Menu Button -->
+      <button id="menuBtn" class="md:hidden text-gray-200 text-2xl">☰</button>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div id="mobileMenu" class="hidden md:hidden bg-gray-950 border-t border-gray-800 px-6 py-4">
+      <ul class="space-y-4 text-gray-200">
+        <li><a href="#home" class="block hover:text-indigo-400">Home</a></li>
+        <li><a href="#about" class="block hover:text-indigo-400">About</a></li>
+        <li><a href="#skills" class="block hover:text-indigo-400">Skills</a></li>
+        <li><a href="#projects" class="block hover:text-indigo-400">Projects</a></li>
+        <li><a href="#contact" class="block hover:text-indigo-400">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section id="home" class="pt-32 pb-20 px-6">
+    <div class="max-w-6xl mx-auto text-center">
+
+      <p class="text-indigo-400 font-semibold text-lg">Hello 👋, I'm</p>
+
+      <h1 class="text-4xl md:text-6xl font-bold mt-2 leading-tight">
+        Prem Doba <br />
+        <span class="text-indigo-400">Android Developer</span>
+      </h1>
+
+      <p class="text-gray-300 mt-6 text-lg leading-relaxed max-w-3xl mx-auto">
+        Android Developer focused on building scalable applications using
+        <span class="text-indigo-300 font-semibold">Kotlin</span>,
+        <span class="text-indigo-300 font-semibold">Jetpack Compose</span>,
+        <span class="text-indigo-300 font-semibold">Firebase</span> and
+        <span class="text-indigo-300 font-semibold">MVVM</span>.
+      </p>
+
+      <p class="text-gray-400 mt-4 text-lg">
+        ⭐ Solved <span class="text-indigo-400 font-semibold">250+</span> LeetCode DSA problems
+      </p>
+
+      <!-- Buttons -->
+      <div class="mt-10 flex justify-center flex-wrap gap-4">
+        <a href="#projects"
+          class="px-8 py-3 rounded-xl bg-indigo-500 hover:bg-indigo-600 btn-animate font-semibold text-lg">
+          View Projects
+        </a>
+
+        <a href="https://drive.google.com/file/d/1tNM24k0U9DBNqwL0She7xpeX4GFlGLee/view?usp=drive_link"
+          target="_blank"
+          class="px-8 py-3 rounded-xl border border-gray-700 hover:border-indigo-400 btn-animate font-semibold text-lg">
+          Download Resume
+        </a>
+      </div>
+
+      <!-- Social Links -->
+      <div class="mt-10 flex justify-center gap-8 text-gray-300 text-lg">
+        <a href="https://github.com/premdoba" target="_blank" class="hover:text-indigo-400 transition">GitHub</a>
+        <a href="https://www.linkedin.com/in/prem-doba/" target="_blank"
+          class="hover:text-indigo-400 transition">LinkedIn</a>
+        <a href="mailto:premdoba4@gmail.com" class="hover:text-indigo-400 transition">Email</a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section id="about" class="py-20 px-6 bg-gray-900/40">
+    <div class="max-w-6xl mx-auto text-center">
+      <h2 class="text-3xl md:text-4xl font-bold text-indigo-400">About Me</h2>
+
+      <p class="mt-8 text-gray-300 text-lg max-w-3xl mx-auto leading-relaxed">
+        I'm an Android Developer passionate about building modern and scalable mobile applications using Kotlin,
+        Jetpack Compose, Firebase, and MVVM architecture.
+        I developed VoiceUp, a real-time college issue reporting app to resolve campus issues efficiently.
+        I also regularly solve DSA problems to strengthen my problem-solving skills.
+      </p>
+
+      <div class="mt-12 grid md:grid-cols-4 gap-6">
+
+        <div class="bg-gray-950 border border-gray-800 rounded-2xl p-6 card-hover">
+          <h3 class="text-xl font-semibold text-indigo-300">🚀 Scalable Apps</h3>
+          <p class="text-gray-400 mt-3">MVVM architecture, clean code and modular development.</p>
+        </div>
+
+        <div class="bg-gray-950 border border-gray-800 rounded-2xl p-6 card-hover">
+          <h3 class="text-xl font-semibold text-indigo-300">📱 Modern UI</h3>
+          <p class="text-gray-400 mt-3">Jetpack Compose UI with Material design and smooth UX.</p>
+        </div>
+
+        <div class="bg-gray-950 border border-gray-800 rounded-2xl p-6 card-hover">
+          <h3 class="text-xl font-semibold text-indigo-300">🔥 Firebase Skills</h3>
+          <p class="text-gray-400 mt-3">Auth, Firestore, real-time sync & secure storage.</p>
+        </div>
+
+        <div class="bg-gray-950 border border-gray-800 rounded-2xl p-6 card-hover">
+          <h3 class="text-xl font-semibold text-indigo-300">🏆 LeetCode DSA</h3>
+          <p class="text-gray-400 mt-3">Solved 250+ LeetCode problems in DSA & OOP.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Skills Section -->
+  <section id="skills" class="py-20 px-6">
+    <div class="max-w-6xl mx-auto">
+      <h2 class="text-3xl md:text-4xl font-bold text-center text-indigo-400">Skills</h2>
+
+      <div class="mt-12 grid sm:grid-cols-2 md:grid-cols-3 gap-6">
+
+        <div class="bg-gray-900 border border-gray-800 rounded-2xl p-6 card-hover">
+          <h3 class="text-xl font-semibold text-indigo-300">Android Development</h3>
+          <p class="text-gray-400 mt-2">Android SDK, Kotlin, Jetpack Compose</p>
+        </div>
+
+        <div class="bg-gray-900 border border-gray-800 rounded-2xl p-6 card-hover">
+          <h3 class="text-xl font-semibold text-indigo-300">Architecture</h3>
+          <p class="text-gray-400 mt-2">MVVM, Repository Pattern, Coroutines</p>
+        </div>
+
+        <div class="bg-gray-900 border border-gray-800 rounded-2xl p-6 card-hover">
+          <h3 class="text-xl font-semibold text-indigo-300">Databases</h3>
+          <p class="text-gray-400 mt-2">Room DB, Firebase Firestore, SQLite</p>
+        </div>
+
+        <div class="bg-gray-900 border border-gray-800 rounded-2xl p-6 card-hover">
+          <h3 class="text-xl font-semibold text-indigo-300">API Integration</h3>
+          <p class="text-gray-400 mt-2">Retrofit, REST APIs, Gson</p>
+        </div>
+
+        <div class="bg-gray-900 border border-gray-800 rounded-2xl p-6 card-hover">
+          <h3 class="text-xl font-semibold text-indigo-300">Languages</h3>
+          <p class="text-gray-400 mt-2">Kotlin, Java, C++, C</p>
+        </div>
+
+        <div class="bg-gray-900 border border-gray-800 rounded-2xl p-6 card-hover">
+          <h3 class="text-xl font-semibold text-indigo-300">Tools</h3>
+          <p class="text-gray-400 mt-2">Git, GitHub, Android Studio, Gradle</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects Section -->
+  <section id="projects" class="py-20 px-6 bg-gray-900/40">
+    <div class="max-w-6xl mx-auto">
+      <h2 class="text-3xl md:text-4xl font-bold text-center text-indigo-400">Projects</h2>
+
+      <div class="mt-12 grid md:grid-cols-2 gap-8">
+
+        <!-- VoiceUp -->
+        <div class="bg-gray-950 border border-gray-800 rounded-2xl overflow-hidden card-hover">
+          <div class="p-6">
+            <h3 class="text-2xl font-semibold text-indigo-300">VoiceUp App</h3>
+            <p class="text-gray-400 mt-3">
+              A real-time college issue reporting platform for students to raise complaints and track resolution status.
+              Built with Kotlin, Jetpack Compose, Firebase, and MVVM.
+            </p>
+
+            <div class="mt-4 flex flex-wrap gap-2">
+              <span class="px-3 py-1 bg-indigo-500/20 text-indigo-300 rounded-lg text-sm">Kotlin</span>
+              <span class="px-3 py-1 bg-indigo-500/20 text-indigo-300 rounded-lg text-sm">Compose</span>
+              <span class="px-3 py-1 bg-indigo-500/20 text-indigo-300 rounded-lg text-sm">Firebase</span>
+              <span class="px-3 py-1 bg-indigo-500/20 text-indigo-300 rounded-lg text-sm">MVVM</span>
+            </div>
+
+            <div class="mt-6">
+              <a href="https://github.com/ykc454/VoiceUp" target="_blank"
+                class="inline-block px-5 py-2 rounded-lg bg-indigo-500 hover:bg-indigo-600 btn-animate font-medium">
+                View on GitHub
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Dictionary -->
+        <div class="bg-gray-950 border border-gray-800 rounded-2xl overflow-hidden card-hover">
+          <div class="p-6">
+            <h3 class="text-2xl font-semibold text-indigo-300">Dictionary App</h3>
+            <p class="text-gray-400 mt-3">
+              A dictionary app that fetches meanings, phonetics, and examples in real-time using REST API.
+              Built with Kotlin, Retrofit, Jetpack Compose, and MVVM.
+            </p>
+
+            <div class="mt-4 flex flex-wrap gap-2">
+              <span class="px-3 py-1 bg-indigo-500/20 text-indigo-300 rounded-lg text-sm">Kotlin</span>
+              <span class="px-3 py-1 bg-indigo-500/20 text-indigo-300 rounded-lg text-sm">Retrofit</span>
+              <span class="px-3 py-1 bg-indigo-500/20 text-indigo-300 rounded-lg text-sm">Compose</span>
+              <span class="px-3 py-1 bg-indigo-500/20 text-indigo-300 rounded-lg text-sm">MVVM</span>
+            </div>
+
+            <div class="mt-6">
+              <a href="https://github.com/premdoba/Dictionary" target="_blank"
+                class="inline-block px-5 py-2 rounded-lg bg-indigo-500 hover:bg-indigo-600 btn-animate font-medium">
+                View on GitHub
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Todo -->
+        <div class="bg-gray-950 border border-gray-800 rounded-2xl overflow-hidden card-hover">
+          <div class="p-6">
+            <h3 class="text-2xl font-semibold text-indigo-300">Todo App</h3>
+            <p class="text-gray-400 mt-3">
+              A To-Do application with full CRUD operations using Room Database and Hilt Dependency Injection.
+              Includes task completion tracking and clean Compose UI.
+            </p>
+
+            <div class="mt-4 flex flex-wrap gap-2">
+              <span class="px-3 py-1 bg-indigo-500/20 text-indigo-300 rounded-lg text-sm">Room</span>
+              <span class="px-3 py-1 bg-indigo-500/20 text-indigo-300 rounded-lg text-sm">Hilt</span>
+              <span class="px-3 py-1 bg-indigo-500/20 text-indigo-300 rounded-lg text-sm">MVVM</span>
+              <span class="px-3 py-1 bg-indigo-500/20 text-indigo-300 rounded-lg text-sm">Compose</span>
+            </div>
+
+            <div class="mt-6">
+              <a href="https://github.com/premdoba/Todo-App" target="_blank"
+                class="inline-block px-5 py-2 rounded-lg bg-indigo-500 hover:bg-indigo-600 btn-animate font-medium">
+                View on GitHub
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- LeetCode -->
+        <div class="bg-gray-950 border border-gray-800 rounded-2xl overflow-hidden card-hover">
+          <div class="p-6">
+            <h3 class="text-2xl font-semibold text-indigo-300">DSA / LeetCode Practice</h3>
+            <p class="text-gray-400 mt-3">
+              Solved <span class="text-indigo-400 font-semibold">250+</span> problems in Arrays, Strings, Trees,
+              Graphs, DP, Recursion, and OOP.
+            </p>
+
+            <div class="mt-4 flex flex-wrap gap-2">
+              <span class="px-3 py-1 bg-indigo-500/20 text-indigo-300 rounded-lg text-sm">C++</span>
+              <span class="px-3 py-1 bg-indigo-500/20 text-indigo-300 rounded-lg text-sm">DSA</span>
+              <span class="px-3 py-1 bg-indigo-500/20 text-indigo-300 rounded-lg text-sm">OOP</span>
+            </div>
+
+            <div class="mt-6">
+              <a href="https://leetcode.com/" target="_blank"
+                class="inline-block px-5 py-2 rounded-lg bg-indigo-500 hover:bg-indigo-600 btn-animate font-medium">
+                Visit LeetCode
+              </a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="py-20 px-6">
+    <div class="max-w-4xl mx-auto text-center">
+      <h2 class="text-3xl md:text-4xl font-bold text-indigo-400">Contact</h2>
+      <p class="text-gray-300 mt-4 text-lg">
+        Feel free to reach out for collaborations, internships, or project work.
+      </p>
+
+      <div class="mt-12 grid md:grid-cols-2 gap-6 text-left">
+
+        <div class="bg-gray-900 border border-gray-800 rounded-2xl p-6 card-hover">
+          <h3 class="text-xl font-semibold text-indigo-300">📧 Email</h3>
+          <p class="text-gray-400 mt-2">
+            <a href="mailto:premdoba4@gmail.com" class="hover:text-indigo-400 transition">
+              premdoba4@gmail.com
+            </a>
+          </p>
+        </div>
+
+        <div class="bg-gray-900 border border-gray-800 rounded-2xl p-6 card-hover">
+          <h3 class="text-xl font-semibold text-indigo-300">📞 Phone</h3>
+          <p class="text-gray-400 mt-2">
+            <a href="tel:+918767666240" class="hover:text-indigo-400 transition">
+              +91 87676 66240
+            </a>
+          </p>
+        </div>
+
+        <div class="bg-gray-900 border border-gray-800 rounded-2xl p-6 card-hover">
+          <h3 class="text-xl font-semibold text-indigo-300">💼 LinkedIn</h3>
+          <p class="text-gray-400 mt-2">
+            <a href="https://www.linkedin.com/in/prem-doba/" target="_blank"
+              class="hover:text-indigo-400 transition">
+              linkedin.com/in/prem-doba
+            </a>
+          </p>
+        </div>
+
+        <div class="bg-gray-900 border border-gray-800 rounded-2xl p-6 card-hover">
+          <h3 class="text-xl font-semibold text-indigo-300">💻 GitHub</h3>
+          <p class="text-gray-400 mt-2">
+            <a href="https://github.com/premdoba" target="_blank" class="hover:text-indigo-400 transition">
+              github.com/premdoba
+            </a>
+          </p>
+        </div>
+
+      </div>
+
+      <div class="mt-12">
+        <a href="mailto:premdoba4@gmail.com"
+          class="inline-block px-8 py-3 rounded-xl bg-indigo-500 hover:bg-indigo-600 btn-animate font-semibold text-lg">
+          Send Email
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="py-6 border-t border-gray-800 text-center text-gray-400">
+    <p>© 2026 Prem Doba | Android Developer Portfolio</p>
+  </footer>
+
+  <!-- JavaScript for Mobile Menu -->
+  <script>
+    const menuBtn = document.getElementById("menuBtn");
+    const mobileMenu = document.getElementById("mobileMenu");
+
+    menuBtn.addEventListener("click", () => {
+      mobileMenu.classList.toggle("hidden");
+    });
+  </script>
+
+</body>
+
+</html>
