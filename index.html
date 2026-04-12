@@ -5,7 +5,17 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Prem Doba | Android Developer Portfolio</title>
+
+  <!-- Favicon (Website Logo) -->
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+
+
   <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Google Font -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
@@ -14,14 +24,31 @@
   <style>
     body {
       font-family: 'Poppins', sans-serif;
+      transition: background 0.8s ease, color 0.8s ease;
+      overflow-x: hidden;
     }
 
     html {
       scroll-behavior: smooth;
     }
 
+    /* Scroll progress bar */
+    #progressBar {
+      height: 4px;
+      width: 0%;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 999;
+      background: linear-gradient(90deg, #6366f1, #ec4899, #22c55e);
+      transition: width 0.2s ease;
+    }
+
+    /* Button Hover */
     .btn-animate {
       transition: all 0.3s ease-in-out;
+      position: relative;
+      overflow: hidden;
     }
 
     .btn-animate:hover {
@@ -29,96 +56,246 @@
       box-shadow: 0px 0px 25px rgba(99, 102, 241, 0.6);
     }
 
+    /* Ripple effect */
+    .btn-animate::after {
+      content: "";
+      position: absolute;
+      width: 0;
+      height: 0;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: rgba(255, 255, 255, 0.4);
+      border-radius: 50%;
+      opacity: 0;
+      transition: all 0.6s ease;
+    }
+
+    .btn-animate:hover::after {
+      width: 250%;
+      height: 250%;
+      opacity: 0;
+    }
+
+    /* Card hover */
     .card-hover {
-      transition: all 0.3s ease-in-out;
+      transition: all 0.35s ease;
     }
 
     .card-hover:hover {
-      transform: translateY(-5px);
-      border-color: rgba(99, 102, 241, 0.8);
-      box-shadow: 0px 0px 30px rgba(99, 102, 241, 0.2);
+      transform: translateY(-10px) scale(1.02);
+      border-color: rgba(99, 102, 241, 0.9);
+      box-shadow: 0px 0px 40px rgba(99, 102, 241, 0.35);
+    }
+
+    /* Tilt effect */
+    .tilt {
+      transform-style: preserve-3d;
+      transition: transform 0.15s ease;
+    }
+
+    /* Scroll Reveal Animations */
+    .reveal {
+      opacity: 0;
+      transition: all 1s ease;
+    }
+
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0px);
+    }
+
+    .from-left {
+      transform: translateX(-120px);
+    }
+
+    .from-right {
+      transform: translateX(120px);
+    }
+
+    .from-bottom {
+      transform: translateY(100px);
+    }
+
+    .zoom-in {
+      transform: scale(0.8);
+    }
+
+    /* Typing cursor */
+    .cursor {
+      display: inline-block;
+      width: 3px;
+      height: 28px;
+      background: #6366f1;
+      margin-left: 6px;
+      animation: blink 0.7s infinite;
+    }
+
+    @keyframes blink {
+      50% {
+        opacity: 0;
+      }
+    }
+
+    /* Floating blobs background */
+    .blob {
+      position: absolute;
+      border-radius: 9999px;
+      filter: blur(90px);
+      opacity: 0.35;
+      animation: floatBlob 10s infinite ease-in-out;
+    }
+
+    @keyframes floatBlob {
+      0% {
+        transform: translate(0, 0) scale(1);
+      }
+
+      50% {
+        transform: translate(80px, -60px) scale(1.2);
+      }
+
+      100% {
+        transform: translate(0, 0) scale(1);
+      }
+    }
+
+    /* Light Theme */
+    .light-theme {
+      background: #f8fafc;
+      color: #0f172a;
+    }
+
+    /* Dark Theme */
+    .dark-theme {
+      background: #030712;
+      color: white;
+    }
+
+    /* Back to top button */
+    #backToTop {
+      position: fixed;
+      bottom: 25px;
+      right: 25px;
+      padding: 12px 14px;
+      border-radius: 999px;
+      background: #6366f1;
+      color: white;
+      font-size: 18px;
+      cursor: pointer;
+      z-index: 999;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.4s ease;
+    }
+
+    #backToTop.show {
+      opacity: 1;
+      transform: translateY(0px);
+    }
+
+    /* Navbar shrink effect */
+    nav.shrink {
+      padding-top: 6px;
+      padding-bottom: 6px;
+      transition: all 0.3s ease;
     }
   </style>
 </head>
 
-<body class="bg-gray-950 text-white">
+<body id="mainBody" class="light-theme">
 
-  <nav class="fixed w-full top-0 z-50 bg-gray-950/70 backdrop-blur-lg border-b border-gray-800">
+  <!-- Scroll Progress Bar -->
+  <div id="progressBar"></div>
+
+  <!-- Back To Top -->
+  <div id="backToTop">⬆</div>
+
+  <!-- Navbar -->
+  <nav id="navbar" class="fixed w-full top-0 z-50 bg-white/70 backdrop-blur-lg border-b border-gray-300">
     <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
-      <h1 class="text-xl font-bold text-indigo-400">Prem Doba</h1>
+      <h1 class="text-xl font-bold text-indigo-600">Prem Doba</h1>
 
-      <ul class="hidden md:flex space-x-8 text-sm font-medium text-gray-200">
-        <li><a href="#home" class="hover:text-indigo-400 transition">Home</a></li>
-        <li><a href="#about" class="hover:text-indigo-400 transition">About</a></li>
-        <li><a href="#skills" class="hover:text-indigo-400 transition">Skills</a></li>
-        <li><a href="#projects" class="hover:text-indigo-400 transition">Projects</a></li>
-        <li><a href="#contact" class="hover:text-indigo-400 transition">Contact</a></li>
+      <ul class="hidden md:flex space-x-8 text-sm font-medium text-gray-700">
+        <li><a href="#home" class="hover:text-indigo-500 transition">Home</a></li>
+        <li><a href="#about" class="hover:text-indigo-500 transition">About</a></li>
+        <li><a href="#skills" class="hover:text-indigo-500 transition">Skills</a></li>
+        <li><a href="#projects" class="hover:text-indigo-500 transition">Projects</a></li>
+        <li><a href="#contact" class="hover:text-indigo-500 transition">Contact</a></li>
       </ul>
 
-      <button id="menuBtn" class="md:hidden text-gray-200 text-2xl">☰</button>
+      <button id="menuBtn" class="md:hidden text-gray-700 text-2xl">☰</button>
     </div>
 
-    <div id="mobileMenu" class="hidden md:hidden bg-gray-950 border-t border-gray-800 px-6 py-4">
-      <ul class="space-y-4 text-gray-200">
-        <li><a href="#home" class="block hover:text-indigo-400">Home</a></li>
-        <li><a href="#about" class="block hover:text-indigo-400">About</a></li>
-        <li><a href="#skills" class="block hover:text-indigo-400">Skills</a></li>
-        <li><a href="#projects" class="block hover:text-indigo-400">Projects</a></li>
-        <li><a href="#contact" class="block hover:text-indigo-400">Contact</a></li>
+    <div id="mobileMenu" class="hidden md:hidden bg-white border-t border-gray-300 px-6 py-4">
+      <ul class="space-y-4 text-gray-700">
+        <li><a href="#home" class="block hover:text-indigo-500">Home</a></li>
+        <li><a href="#about" class="block hover:text-indigo-500">About</a></li>
+        <li><a href="#skills" class="block hover:text-indigo-500">Skills</a></li>
+        <li><a href="#projects" class="block hover:text-indigo-500">Projects</a></li>
+        <li><a href="#contact" class="block hover:text-indigo-500">Contact</a></li>
       </ul>
     </div>
   </nav>
 
-  <section id="home" class="pt-32 pb-20 px-6">
-    <div class="max-w-6xl mx-auto text-center">
+  <!-- Hero Section -->
+  <section id="home" class="pt-32 pb-20 px-6 relative overflow-hidden">
 
-      <p class="text-indigo-400 font-semibold text-lg">Hello 👋, I'm</p>
+    <!-- Background Blobs -->
+    <div class="blob w-72 h-72 bg-indigo-400 top-10 left-10"></div>
+    <div class="blob w-72 h-72 bg-pink-400 top-40 right-10"></div>
+    <div class="blob w-72 h-72 bg-green-400 bottom-10 left-1/2"></div>
 
-      <h1 class="text-4xl md:text-6xl font-bold mt-2 leading-tight">
+    <div class="max-w-6xl mx-auto text-center relative z-10 reveal from-bottom active">
+
+      <p class="text-indigo-600 font-semibold text-lg">Hello 👋, I'm</p>
+
+      <h1 class="text-4xl md:text-6xl font-bold mt-2 leading-tight text-gray-900">
         Prem Doba <br />
-        <span class="text-indigo-400">Android Developer</span>
+        <span class="text-indigo-600" id="typingText"></span><span class="cursor"></span>
       </h1>
 
-      <p class="text-gray-300 mt-6 text-lg leading-relaxed max-w-3xl mx-auto">
+      <p class="text-gray-600 mt-6 text-lg leading-relaxed max-w-3xl mx-auto">
         Android Developer focused on building scalable applications using
-        <span class="text-indigo-300 font-semibold">Kotlin</span>,
-        <span class="text-indigo-300 font-semibold">Jetpack Compose</span>,
-        <span class="text-indigo-300 font-semibold">Firebase</span> and
-        <span class="text-indigo-300 font-semibold">MVVM</span>.
+        <span class="text-indigo-600 font-semibold">Kotlin</span>,
+        <span class="text-indigo-600 font-semibold">Jetpack Compose</span>,
+        <span class="text-indigo-600 font-semibold">Firebase</span> and
+        <span class="text-indigo-600 font-semibold">MVVM</span>.
       </p>
 
-      <p class="text-gray-400 mt-4 text-lg">
-        ⭐ Solved <span class="text-indigo-400 font-semibold">250+</span> LeetCode DSA problems
+      <p class="text-gray-500 mt-4 text-lg">
+        ⭐ Solved <span class="text-indigo-600 font-semibold">250+</span> LeetCode DSA problems
       </p>
 
       <div class="mt-10 flex justify-center flex-wrap gap-4">
         <a href="#projects"
-          class="px-8 py-3 rounded-xl bg-indigo-500 hover:bg-indigo-600 btn-animate font-semibold text-lg">
+          class="px-8 py-3 rounded-xl bg-indigo-600 hover:bg-indigo-700 btn-animate font-semibold text-lg text-white">
           View Projects
         </a>
 
         <a href="https://drive.google.com/file/d/1tNM24k0U9DBNqwL0She7xpeX4GFlGLee/view?usp=drive_link"
           target="_blank"
-          class="px-8 py-3 rounded-xl border border-gray-700 hover:border-indigo-400 btn-animate font-semibold text-lg">
+          class="px-8 py-3 rounded-xl border border-gray-400 hover:border-indigo-500 btn-animate font-semibold text-lg text-gray-800">
           Download Resume
         </a>
       </div>
 
-      <div class="mt-10 flex justify-center gap-8 text-gray-300 text-lg">
-        <a href="https://github.com/premdoba" target="_blank" class="hover:text-indigo-400 transition">GitHub</a>
+      <div class="mt-10 flex justify-center gap-8 text-gray-600 text-lg">
+        <a href="https://github.com/premdoba" target="_blank" class="hover:text-indigo-600 transition">GitHub</a>
         <a href="https://www.linkedin.com/in/prem-doba/" target="_blank"
-          class="hover:text-indigo-400 transition">LinkedIn</a>
-        <a href="mailto:premdoba4@gmail.com" class="hover:text-indigo-400 transition">Email</a>
+          class="hover:text-indigo-600 transition">LinkedIn</a>
+        <a href="mailto:premdoba4@gmail.com" class="hover:text-indigo-600 transition">Email</a>
       </div>
 
     </div>
   </section>
 
-  <section id="about" class="py-20 px-6 bg-gray-900/40">
+  <!-- About Section -->
+  <section id="about" class="py-20 px-6 bg-gray-100 reveal from-left">
     <div class="max-w-6xl mx-auto text-center">
-      <h2 class="text-3xl md:text-4xl font-bold text-indigo-400">About Me</h2>
+      <h2 class="text-3xl md:text-4xl font-bold text-indigo-600">About Me</h2>
 
-      <p class="mt-8 text-gray-300 text-lg max-w-3xl mx-auto leading-relaxed">
+      <p class="mt-8 text-gray-700 text-lg max-w-3xl mx-auto leading-relaxed">
         I'm an Android Developer passionate about building modern and scalable mobile applications using Kotlin,
         Jetpack Compose, Firebase, and MVVM architecture.
         I developed VoiceUp, a real-time college issue reporting app to resolve campus issues efficiently.
@@ -127,160 +304,136 @@
 
       <div class="mt-12 grid md:grid-cols-4 gap-6">
 
-        <div class="bg-gray-950 border border-gray-800 rounded-2xl p-6 card-hover">
-          <div class="w-12 h-12 flex items-center justify-center rounded-xl bg-indigo-500/20 mb-4 mx-auto">
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7 text-indigo-400" fill="none" viewBox="0 0 24 24"
-              stroke="currentColor" stroke-width="2">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M3 3h18v6H3V3zm0 12h18v6H3v-6z" />
-            </svg>
-          </div>
-          <h3 class="text-xl font-semibold text-indigo-300">Scalable Apps</h3>
-          <p class="text-gray-400 mt-3">Clean architecture, MVVM pattern and modular code.</p>
+        <div class="bg-white border border-gray-300 rounded-2xl p-6 card-hover tilt">
+          <h3 class="text-xl font-semibold text-indigo-600">Scalable Apps</h3>
+          <p class="text-gray-600 mt-3">Clean architecture, MVVM pattern and modular code.</p>
         </div>
 
-        <div class="bg-gray-950 border border-gray-800 rounded-2xl p-6 card-hover">
-          <div class="w-12 h-12 flex items-center justify-center rounded-xl bg-indigo-500/20 mb-4 mx-auto">
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7 text-indigo-400" fill="none" viewBox="0 0 24 24"
-              stroke="currentColor" stroke-width="2">
-              <path stroke-linecap="round" stroke-linejoin="round"
-                d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
-            </svg>
-          </div>
-          <h3 class="text-xl font-semibold text-indigo-300">Modern UI</h3>
-          <p class="text-gray-400 mt-3">Jetpack Compose UI with smooth user experience.</p>
+        <div class="bg-white border border-gray-300 rounded-2xl p-6 card-hover tilt">
+          <h3 class="text-xl font-semibold text-indigo-600">Modern UI</h3>
+          <p class="text-gray-600 mt-3">Jetpack Compose UI with smooth user experience.</p>
         </div>
 
-        <div class="bg-gray-950 border border-gray-800 rounded-2xl p-6 card-hover">
-          <div class="w-12 h-12 flex items-center justify-center rounded-xl bg-indigo-500/20 mb-4 mx-auto">
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7 text-indigo-400" fill="none" viewBox="0 0 24 24"
-              stroke="currentColor" stroke-width="2">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
-            </svg>
-          </div>
-          <h3 class="text-xl font-semibold text-indigo-300">Firebase Integration</h3>
-          <p class="text-gray-400 mt-3">Auth, Firestore, real-time database & storage.</p>
+        <div class="bg-white border border-gray-300 rounded-2xl p-6 card-hover tilt">
+          <h3 class="text-xl font-semibold text-indigo-600">Firebase Integration</h3>
+          <p class="text-gray-600 mt-3">Auth, Firestore, real-time database & storage.</p>
         </div>
 
-        <div class="bg-gray-950 border border-gray-800 rounded-2xl p-6 card-hover">
-          <div class="w-12 h-12 flex items-center justify-center rounded-xl bg-indigo-500/20 mb-4 mx-auto">
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7 text-indigo-400" fill="none" viewBox="0 0 24 24"
-              stroke="currentColor" stroke-width="2">
-              <path stroke-linecap="round" stroke-linejoin="round"
-                d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-            </svg>
-          </div>
-          <h3 class="text-xl font-semibold text-indigo-300">LeetCode DSA</h3>
-          <p class="text-gray-400 mt-3">Solved 250+ problems in DSA & problem solving.</p>
+        <div class="bg-white border border-gray-300 rounded-2xl p-6 card-hover tilt">
+          <h3 class="text-xl font-semibold text-indigo-600">LeetCode DSA</h3>
+          <p class="text-gray-600 mt-3">Solved 250+ problems in DSA & problem solving.</p>
         </div>
 
       </div>
     </div>
   </section>
 
-  <section id="skills" class="py-20 px-6">
+  <!-- Skills Section -->
+  <section id="skills" class="py-20 px-6 reveal zoom-in">
     <div class="max-w-6xl mx-auto">
-      <h2 class="text-3xl md:text-4xl font-bold text-center text-indigo-400">Skills</h2>
+      <h2 class="text-3xl md:text-4xl font-bold text-center text-indigo-600">Skills</h2>
 
       <div class="mt-12 grid sm:grid-cols-2 md:grid-cols-3 gap-6">
 
-        <div class="bg-gray-900 border border-gray-800 rounded-2xl p-6 card-hover">
-          <h3 class="text-xl font-semibold text-indigo-300">Android Development</h3>
-          <p class="text-gray-400 mt-2">Android SDK, Kotlin, Jetpack Compose</p>
+        <div class="bg-white border border-gray-300 rounded-2xl p-6 card-hover tilt">
+          <h3 class="text-xl font-semibold text-indigo-600">Android Development</h3>
+          <p class="text-gray-600 mt-2">Android SDK, Kotlin, Jetpack Compose</p>
         </div>
 
-        <div class="bg-gray-900 border border-gray-800 rounded-2xl p-6 card-hover">
-          <h3 class="text-xl font-semibold text-indigo-300">Architecture</h3>
-          <p class="text-gray-400 mt-2">MVVM, Repository Pattern, Coroutines</p>
+        <div class="bg-white border border-gray-300 rounded-2xl p-6 card-hover tilt">
+          <h3 class="text-xl font-semibold text-indigo-600">Architecture</h3>
+          <p class="text-gray-600 mt-2">MVVM, Repository Pattern, Coroutines</p>
         </div>
 
-        <div class="bg-gray-900 border border-gray-800 rounded-2xl p-6 card-hover">
-          <h3 class="text-xl font-semibold text-indigo-300">Databases</h3>
-          <p class="text-gray-400 mt-2">Room DB, Firebase Firestore, SQLite</p>
+        <div class="bg-white border border-gray-300 rounded-2xl p-6 card-hover tilt">
+          <h3 class="text-xl font-semibold text-indigo-600">Databases</h3>
+          <p class="text-gray-600 mt-2">Room DB, Firebase Firestore, SQLite</p>
         </div>
 
-        <div class="bg-gray-900 border border-gray-800 rounded-2xl p-6 card-hover">
-          <h3 class="text-xl font-semibold text-indigo-300">API Integration</h3>
-          <p class="text-gray-400 mt-2">Retrofit, REST APIs, Gson</p>
+        <div class="bg-white border border-gray-300 rounded-2xl p-6 card-hover tilt">
+          <h3 class="text-xl font-semibold text-indigo-600">API Integration</h3>
+          <p class="text-gray-600 mt-2">Retrofit, REST APIs, Gson</p>
         </div>
 
-        <div class="bg-gray-900 border border-gray-800 rounded-2xl p-6 card-hover">
-          <h3 class="text-xl font-semibold text-indigo-300">Languages</h3>
-          <p class="text-gray-400 mt-2">Kotlin, Java, C++, C</p>
+        <div class="bg-white border border-gray-300 rounded-2xl p-6 card-hover tilt">
+          <h3 class="text-xl font-semibold text-indigo-600">Languages</h3>
+          <p class="text-gray-600 mt-2">Kotlin, Java, C++, C</p>
         </div>
 
-        <div class="bg-gray-900 border border-gray-800 rounded-2xl p-6 card-hover">
-          <h3 class="text-xl font-semibold text-indigo-300">Tools</h3>
-          <p class="text-gray-400 mt-2">Git, GitHub, Android Studio, Gradle</p>
+        <div class="bg-white border border-gray-300 rounded-2xl p-6 card-hover tilt">
+          <h3 class="text-xl font-semibold text-indigo-600">Tools</h3>
+          <p class="text-gray-600 mt-2">Git, GitHub, Android Studio, Gradle</p>
         </div>
 
       </div>
     </div>
   </section>
 
-  <section id="projects" class="py-20 px-6 bg-gray-900/40">
+  <!-- Projects Section -->
+  <section id="projects" class="py-20 px-6 bg-gray-100 reveal from-right">
     <div class="max-w-6xl mx-auto">
-      <h2 class="text-3xl md:text-4xl font-bold text-center text-indigo-400">Projects</h2>
+      <h2 class="text-3xl md:text-4xl font-bold text-center text-indigo-600">Projects</h2>
 
       <div class="mt-12 grid md:grid-cols-2 gap-8">
 
-        <div class="bg-gray-950 border border-gray-800 rounded-2xl overflow-hidden card-hover">
+        <div class="bg-white border border-gray-300 rounded-2xl overflow-hidden card-hover tilt">
           <div class="p-6">
-            <h3 class="text-2xl font-semibold text-indigo-300">VoiceUp App</h3>
-            <p class="text-gray-400 mt-3">
+            <h3 class="text-2xl font-semibold text-indigo-600">VoiceUp App</h3>
+            <p class="text-gray-600 mt-3">
               A real-time college issue reporting platform for students to raise complaints and track resolution status.
               Built with Kotlin, Jetpack Compose, Firebase, and MVVM.
             </p>
             <div class="mt-6">
               <a href="https://github.com/ykc454/VoiceUp" target="_blank"
-                class="inline-block px-5 py-2 rounded-lg bg-indigo-500 hover:bg-indigo-600 btn-animate font-medium">
+                class="inline-block px-5 py-2 rounded-lg bg-indigo-600 hover:bg-indigo-700 btn-animate font-medium text-white">
                 View on GitHub
               </a>
             </div>
           </div>
         </div>
 
-        <div class="bg-gray-950 border border-gray-800 rounded-2xl overflow-hidden card-hover">
+        <div class="bg-white border border-gray-300 rounded-2xl overflow-hidden card-hover tilt">
           <div class="p-6">
-            <h3 class="text-2xl font-semibold text-indigo-300">Dictionary App</h3>
-            <p class="text-gray-400 mt-3">
+            <h3 class="text-2xl font-semibold text-indigo-600">Dictionary App</h3>
+            <p class="text-gray-600 mt-3">
               A dictionary app that fetches meanings, phonetics, and examples in real-time using REST API.
               Built with Kotlin, Retrofit, Jetpack Compose, and MVVM.
             </p>
             <div class="mt-6">
               <a href="https://github.com/premdoba/Dictionary" target="_blank"
-                class="inline-block px-5 py-2 rounded-lg bg-indigo-500 hover:bg-indigo-600 btn-animate font-medium">
+                class="inline-block px-5 py-2 rounded-lg bg-indigo-600 hover:bg-indigo-700 btn-animate font-medium text-white">
                 View on GitHub
               </a>
             </div>
           </div>
         </div>
 
-        <div class="bg-gray-950 border border-gray-800 rounded-2xl overflow-hidden card-hover">
+        <div class="bg-white border border-gray-300 rounded-2xl overflow-hidden card-hover tilt">
           <div class="p-6">
-            <h3 class="text-2xl font-semibold text-indigo-300">Todo App</h3>
-            <p class="text-gray-400 mt-3">
+            <h3 class="text-2xl font-semibold text-indigo-600">Todo App</h3>
+            <p class="text-gray-600 mt-3">
               A To-Do application with full CRUD operations using Room Database and Hilt Dependency Injection.
               Includes task completion tracking and clean Compose UI.
             </p>
             <div class="mt-6">
               <a href="https://github.com/premdoba/Todo-App" target="_blank"
-                class="inline-block px-5 py-2 rounded-lg bg-indigo-500 hover:bg-indigo-600 btn-animate font-medium">
+                class="inline-block px-5 py-2 rounded-lg bg-indigo-600 hover:bg-indigo-700 btn-animate font-medium text-white">
                 View on GitHub
               </a>
             </div>
           </div>
         </div>
 
-        <div class="bg-gray-950 border border-gray-800 rounded-2xl overflow-hidden card-hover">
+        <div class="bg-white border border-gray-300 rounded-2xl overflow-hidden card-hover tilt">
           <div class="p-6">
-            <h3 class="text-2xl font-semibold text-indigo-300">DSA / LeetCode Practice</h3>
-            <p class="text-gray-400 mt-3">
-              Solved <span class="text-indigo-400 font-semibold">250+</span> problems in Arrays, Strings, Trees,
+            <h3 class="text-2xl font-semibold text-indigo-600">DSA / LeetCode Practice</h3>
+            <p class="text-gray-600 mt-3">
+              Solved <span class="text-indigo-600 font-semibold">250+</span> problems in Arrays, Strings, Trees,
               Graphs, DP, Recursion, and OOP.
             </p>
             <div class="mt-6">
               <a href="https://leetcode.com/" target="_blank"
-                class="inline-block px-5 py-2 rounded-lg bg-indigo-500 hover:bg-indigo-600 btn-animate font-medium">
+                class="inline-block px-5 py-2 rounded-lg bg-indigo-600 hover:bg-indigo-700 btn-animate font-medium text-white">
                 Visit LeetCode
               </a>
             </div>
@@ -291,7 +444,8 @@
     </div>
   </section>
 
-  <section id="contact" class="py-20 px-6">
+  <!-- Contact Section (Dark Theme) -->
+  <section id="contact" class="py-20 px-6 bg-gray-950 text-white reveal from-bottom">
     <div class="max-w-4xl mx-auto text-center">
       <h2 class="text-3xl md:text-4xl font-bold text-indigo-400">Contact</h2>
       <p class="text-gray-300 mt-4 text-lg">
@@ -300,13 +454,10 @@
 
       <div class="mt-12 grid md:grid-cols-2 gap-6 text-left">
 
-        <div class="bg-gray-900 border border-gray-800 rounded-2xl p-6 card-hover flex items-center gap-4">
+        <!-- Email -->
+        <div class="bg-gray-900 border border-gray-800 rounded-2xl p-6 card-hover tilt flex items-center gap-4">
           <div class="w-12 h-12 flex items-center justify-center rounded-xl bg-indigo-500/20">
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7 text-indigo-400" fill="none" viewBox="0 0 24 24"
-              stroke="currentColor" stroke-width="2">
-              <path stroke-linecap="round" stroke-linejoin="round"
-                d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8m-18 8h18a2 2 0 002-2V6a2 2 0 00-2-2H3a2 2 0 00-2 2v8a2 2 0 002 2z" />
-            </svg>
+            📧
           </div>
           <div>
             <h3 class="text-lg font-semibold text-indigo-300">Email</h3>
@@ -316,13 +467,10 @@
           </div>
         </div>
 
-        <div class="bg-gray-900 border border-gray-800 rounded-2xl p-6 card-hover flex items-center gap-4">
+        <!-- Phone -->
+        <div class="bg-gray-900 border border-gray-800 rounded-2xl p-6 card-hover tilt flex items-center gap-4">
           <div class="w-12 h-12 flex items-center justify-center rounded-xl bg-indigo-500/20">
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7 text-indigo-400" fill="none" viewBox="0 0 24 24"
-              stroke="currentColor" stroke-width="2">
-              <path stroke-linecap="round" stroke-linejoin="round"
-                d="M3 5a2 2 0 012-2h3.28a1 1 0 01.95.68l1.5 4.49a1 1 0 01-.5 1.21l-2.26 1.13a11.04 11.04 0 005.52 5.52l1.13-2.26a1 1 0 011.21-.5l4.49 1.5a1 1 0 01.68.95V19a2 2 0 01-2 2h-1C9.16 21 3 14.84 3 7V5z" />
-            </svg>
+            📞
           </div>
           <div>
             <h3 class="text-lg font-semibold text-indigo-300">Phone</h3>
@@ -332,13 +480,10 @@
           </div>
         </div>
 
-        <div class="bg-gray-900 border border-gray-800 rounded-2xl p-6 card-hover flex items-center gap-4">
+        <!-- LinkedIn -->
+        <div class="bg-gray-900 border border-gray-800 rounded-2xl p-6 card-hover tilt flex items-center gap-4">
           <div class="w-12 h-12 flex items-center justify-center rounded-xl bg-indigo-500/20">
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7 text-indigo-400" fill="currentColor"
-              viewBox="0 0 24 24">
-              <path
-                d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1 4.98 2.12 4.98 3.5zM.5 23.5h4V7.98h-4V23.5zM8.5 7.98h3.8v2.12h.05c.53-1 1.83-2.12 3.77-2.12 4.03 0 4.78 2.65 4.78 6.1v9.42h-4v-8.35c0-2-.04-4.57-2.79-4.57-2.79 0-3.22 2.18-3.22 4.43v8.5h-4V7.98z" />
-            </svg>
+            🔗
           </div>
           <div>
             <h3 class="text-lg font-semibold text-indigo-300">LinkedIn</h3>
@@ -349,13 +494,10 @@
           </div>
         </div>
 
-        <div class="bg-gray-900 border border-gray-800 rounded-2xl p-6 card-hover flex items-center gap-4">
+        <!-- GitHub -->
+        <div class="bg-gray-900 border border-gray-800 rounded-2xl p-6 card-hover tilt flex items-center gap-4">
           <div class="w-12 h-12 flex items-center justify-center rounded-xl bg-indigo-500/20">
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7 text-indigo-400" fill="currentColor"
-              viewBox="0 0 24 24">
-              <path
-                d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.44 9.8 8.2 11.38.6.1.82-.26.82-.58v-2.2c-3.34.73-4.04-1.6-4.04-1.6-.55-1.4-1.34-1.78-1.34-1.78-1.1-.75.08-.74.08-.74 1.2.08 1.83 1.24 1.83 1.24 1.08 1.84 2.83 1.3 3.52.99.1-.78.42-1.3.76-1.6-2.67-.3-5.47-1.33-5.47-5.92 0-1.3.47-2.37 1.24-3.2-.13-.3-.54-1.52.12-3.17 0 0 1-.32 3.3 1.22a11.5 11.5 0 016 0C17.3 4.3 18.3 4.62 18.3 4.62c.66 1.65.25 2.87.12 3.17.77.83 1.24 1.9 1.24 3.2 0 4.6-2.8 5.62-5.48 5.92.43.37.82 1.1.82 2.22v3.3c0 .32.22.69.82.58C20.56 21.8 24 17.3 24 12c0-6.63-5.37-12-12-12z" />
-            </svg>
+            💻
           </div>
           <div>
             <h3 class="text-lg font-semibold text-indigo-300">GitHub</h3>
@@ -378,16 +520,139 @@
     </div>
   </section>
 
-  <footer class="py-6 border-t border-gray-800 text-center text-gray-400">
+  <!-- Footer -->
+  <footer class="py-6 border-t border-gray-800 text-center text-gray-400 bg-gray-950">
     <p>© 2026 Prem Doba | Android Developer Portfolio</p>
   </footer>
 
   <script>
+    // Mobile Menu
     const menuBtn = document.getElementById("menuBtn");
     const mobileMenu = document.getElementById("mobileMenu");
 
     menuBtn.addEventListener("click", () => {
       mobileMenu.classList.toggle("hidden");
+    });
+
+    // Typing Animation
+    const typingText = document.getElementById("typingText");
+    const words = ["Android Developer", "Kotlin Developer", "Jetpack Compose Expert", "Firebase Enthusiast"];
+    let wordIndex = 0;
+    let charIndex = 0;
+    let isDeleting = false;
+
+    function typeEffect() {
+      let currentWord = words[wordIndex];
+
+      if (!isDeleting) {
+        typingText.textContent = currentWord.substring(0, charIndex++);
+        if (charIndex > currentWord.length) {
+          isDeleting = true;
+          setTimeout(typeEffect, 1200);
+          return;
+        }
+      } else {
+        typingText.textContent = currentWord.substring(0, charIndex--);
+        if (charIndex < 0) {
+          isDeleting = false;
+          wordIndex = (wordIndex + 1) % words.length;
+        }
+      }
+
+      setTimeout(typeEffect, isDeleting ? 60 : 110);
+    }
+
+    typeEffect();
+
+    // Scroll Reveal Animation
+    function revealElements() {
+      let reveals = document.querySelectorAll(".reveal");
+
+      reveals.forEach((el) => {
+        let windowHeight = window.innerHeight;
+        let elementTop = el.getBoundingClientRect().top;
+        let elementVisible = 120;
+
+        if (elementTop < windowHeight - elementVisible) {
+          el.classList.add("active");
+        }
+      });
+    }
+
+    window.addEventListener("scroll", revealElements);
+    revealElements();
+
+    // Theme Change at Contact
+    const body = document.getElementById("mainBody");
+    const navbar = document.getElementById("navbar");
+    const contactSection = document.getElementById("contact");
+
+    window.addEventListener("scroll", () => {
+      const contactTop = contactSection.getBoundingClientRect().top;
+
+      if (contactTop < window.innerHeight / 1.3) {
+        body.classList.add("dark-theme");
+        body.classList.remove("light-theme");
+
+        navbar.classList.remove("bg-white/70", "border-gray-300");
+        navbar.classList.add("bg-gray-950/70", "border-gray-800");
+      } else {
+        body.classList.add("light-theme");
+        body.classList.remove("dark-theme");
+
+        navbar.classList.remove("bg-gray-950/70", "border-gray-800");
+        navbar.classList.add("bg-white/70", "border-gray-300");
+      }
+    });
+
+    // Scroll Progress Bar
+    window.addEventListener("scroll", () => {
+      const scrollTop = document.documentElement.scrollTop;
+      const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const scrollPercent = (scrollTop / scrollHeight) * 100;
+      document.getElementById("progressBar").style.width = scrollPercent + "%";
+    });
+
+    // Back to Top Button
+    const backToTop = document.getElementById("backToTop");
+
+    window.addEventListener("scroll", () => {
+      if (window.scrollY > 400) {
+        backToTop.classList.add("show");
+      } else {
+        backToTop.classList.remove("show");
+      }
+    });
+
+    backToTop.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+
+    // Navbar shrink
+    window.addEventListener("scroll", () => {
+      if (window.scrollY > 80) {
+        navbar.classList.add("shrink");
+      } else {
+        navbar.classList.remove("shrink");
+      }
+    });
+
+    // Tilt Effect
+    document.querySelectorAll(".tilt").forEach(card => {
+      card.addEventListener("mousemove", (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+
+        const rotateX = ((y / rect.height) - 0.5) * 10;
+        const rotateY = ((x / rect.width) - 0.5) * -10;
+
+        card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.03)`;
+      });
+
+      card.addEventListener("mouseleave", () => {
+        card.style.transform = "rotateX(0deg) rotateY(0deg) scale(1)";
+      });
     });
   </script>
 
