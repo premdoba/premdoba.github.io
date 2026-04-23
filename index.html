@@ -6,16 +6,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Prem Doba | Android Developer Portfolio</title>
 
-  <!-- Favicon (Website Logo) -->
   <link rel="icon" type="image/x-icon" href="favicon.ico">
   <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
 
-
   <script src="https://cdn.tailwindcss.com"></script>
 
-  <!-- Google Font -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
@@ -32,7 +29,6 @@
       scroll-behavior: smooth;
     }
 
-    /* Scroll progress bar */
     #progressBar {
       height: 4px;
       width: 0%;
@@ -44,7 +40,6 @@
       transition: width 0.2s ease;
     }
 
-    /* Button Hover */
     .btn-animate {
       transition: all 0.3s ease-in-out;
       position: relative;
@@ -56,7 +51,6 @@
       box-shadow: 0px 0px 25px rgba(99, 102, 241, 0.6);
     }
 
-    /* Ripple effect */
     .btn-animate::after {
       content: "";
       position: absolute;
@@ -77,7 +71,6 @@
       opacity: 0;
     }
 
-    /* Card hover */
     .card-hover {
       transition: all 0.35s ease;
     }
@@ -88,13 +81,11 @@
       box-shadow: 0px 0px 40px rgba(99, 102, 241, 0.35);
     }
 
-    /* Tilt effect */
     .tilt {
       transform-style: preserve-3d;
       transition: transform 0.15s ease;
     }
 
-    /* Scroll Reveal Animations */
     .reveal {
       opacity: 0;
       transition: all 1s ease;
@@ -121,7 +112,6 @@
       transform: scale(0.8);
     }
 
-    /* Typing cursor */
     .cursor {
       display: inline-block;
       width: 3px;
@@ -137,7 +127,6 @@
       }
     }
 
-    /* Floating blobs background */
     .blob {
       position: absolute;
       border-radius: 9999px;
@@ -160,19 +149,16 @@
       }
     }
 
-    /* Light Theme */
     .light-theme {
       background: #f8fafc;
       color: #0f172a;
     }
 
-    /* Dark Theme */
     .dark-theme {
       background: #030712;
       color: white;
     }
 
-    /* Back to top button */
     #backToTop {
       position: fixed;
       bottom: 25px;
@@ -194,7 +180,6 @@
       transform: translateY(0px);
     }
 
-    /* Navbar shrink effect */
     nav.shrink {
       padding-top: 6px;
       padding-bottom: 6px;
@@ -205,13 +190,10 @@
 
 <body id="mainBody" class="light-theme">
 
-  <!-- Scroll Progress Bar -->
   <div id="progressBar"></div>
 
-  <!-- Back To Top -->
   <div id="backToTop">⬆</div>
 
-  <!-- Navbar -->
   <nav id="navbar" class="fixed w-full top-0 z-50 bg-white/70 backdrop-blur-lg border-b border-gray-300">
     <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
       <h1 class="text-xl font-bold text-indigo-600">Prem Doba</h1>
@@ -238,10 +220,8 @@
     </div>
   </nav>
 
-  <!-- Hero Section -->
   <section id="home" class="pt-32 pb-20 px-6 relative overflow-hidden">
 
-    <!-- Background Blobs -->
     <div class="blob w-72 h-72 bg-indigo-400 top-10 left-10"></div>
     <div class="blob w-72 h-72 bg-pink-400 top-40 right-10"></div>
     <div class="blob w-72 h-72 bg-green-400 bottom-10 left-1/2"></div>
@@ -273,7 +253,7 @@
           View Projects
         </a>
 
-        <a href="https://drive.google.com/file/d/1tNM24k0U9DBNqwL0She7xpeX4GFlGLee/view?usp=drive_link"
+        <a href="https://drive.google.com/file/d/15nYuL_fgK8SVzV7cBOJpk9N_5CjM-Caz/view?usp=drive_link"
           target="_blank"
           class="px-8 py-3 rounded-xl border border-gray-400 hover:border-indigo-500 btn-animate font-semibold text-lg text-gray-800">
           Download Resume
@@ -290,7 +270,6 @@
     </div>
   </section>
 
-  <!-- About Section -->
   <section id="about" class="py-20 px-6 bg-gray-100 reveal from-left">
     <div class="max-w-6xl mx-auto text-center">
       <h2 class="text-3xl md:text-4xl font-bold text-indigo-600">About Me</h2>
@@ -328,7 +307,6 @@
     </div>
   </section>
 
-  <!-- Skills Section -->
   <section id="skills" class="py-20 px-6 reveal zoom-in">
     <div class="max-w-6xl mx-auto">
       <h2 class="text-3xl md:text-4xl font-bold text-center text-indigo-600">Skills</h2>
@@ -369,7 +347,6 @@
     </div>
   </section>
 
-  <!-- Projects Section -->
   <section id="projects" class="py-20 px-6 bg-gray-100 reveal from-right">
     <div class="max-w-6xl mx-auto">
       <h2 class="text-3xl md:text-4xl font-bold text-center text-indigo-600">Projects</h2>
@@ -432,7 +409,7 @@
               Graphs, DP, Recursion, and OOP.
             </p>
             <div class="mt-6">
-              <a href="https://leetcode.com/" target="_blank"
+              <a href="https://leetcode.com/u/PremDoba/" target="_blank"
                 class="inline-block px-5 py-2 rounded-lg bg-indigo-600 hover:bg-indigo-700 btn-animate font-medium text-white">
                 Visit LeetCode
               </a>
@@ -444,7 +421,6 @@
     </div>
   </section>
 
-  <!-- Contact Section (Dark Theme) -->
   <section id="contact" class="py-20 px-6 bg-gray-950 text-white reveal from-bottom">
     <div class="max-w-4xl mx-auto text-center">
       <h2 class="text-3xl md:text-4xl font-bold text-indigo-400">Contact</h2>
@@ -454,7 +430,6 @@
 
       <div class="mt-12 grid md:grid-cols-2 gap-6 text-left">
 
-        <!-- Email -->
         <div class="bg-gray-900 border border-gray-800 rounded-2xl p-6 card-hover tilt flex items-center gap-4">
           <div class="w-12 h-12 flex items-center justify-center rounded-xl bg-indigo-500/20">
             📧
@@ -467,7 +442,6 @@
           </div>
         </div>
 
-        <!-- Phone -->
         <div class="bg-gray-900 border border-gray-800 rounded-2xl p-6 card-hover tilt flex items-center gap-4">
           <div class="w-12 h-12 flex items-center justify-center rounded-xl bg-indigo-500/20">
             📞
@@ -480,7 +454,6 @@
           </div>
         </div>
 
-        <!-- LinkedIn -->
         <div class="bg-gray-900 border border-gray-800 rounded-2xl p-6 card-hover tilt flex items-center gap-4">
           <div class="w-12 h-12 flex items-center justify-center rounded-xl bg-indigo-500/20">
             🔗
@@ -494,7 +467,6 @@
           </div>
         </div>
 
-        <!-- GitHub -->
         <div class="bg-gray-900 border border-gray-800 rounded-2xl p-6 card-hover tilt flex items-center gap-4">
           <div class="w-12 h-12 flex items-center justify-center rounded-xl bg-indigo-500/20">
             💻
@@ -520,13 +492,11 @@
     </div>
   </section>
 
-  <!-- Footer -->
   <footer class="py-6 border-t border-gray-800 text-center text-gray-400 bg-gray-950">
     <p>© 2026 Prem Doba | Android Developer Portfolio</p>
   </footer>
 
   <script>
-    // Mobile Menu
     const menuBtn = document.getElementById("menuBtn");
     const mobileMenu = document.getElementById("mobileMenu");
 
@@ -534,7 +504,6 @@
       mobileMenu.classList.toggle("hidden");
     });
 
-    // Typing Animation
     const typingText = document.getElementById("typingText");
     const words = ["Android Developer", "Kotlin Developer", "Jetpack Compose Expert", "Firebase Enthusiast"];
     let wordIndex = 0;
@@ -564,7 +533,6 @@
 
     typeEffect();
 
-    // Scroll Reveal Animation
     function revealElements() {
       let reveals = document.querySelectorAll(".reveal");
 
@@ -582,7 +550,6 @@
     window.addEventListener("scroll", revealElements);
     revealElements();
 
-    // Theme Change at Contact
     const body = document.getElementById("mainBody");
     const navbar = document.getElementById("navbar");
     const contactSection = document.getElementById("contact");
@@ -605,7 +572,6 @@
       }
     });
 
-    // Scroll Progress Bar
     window.addEventListener("scroll", () => {
       const scrollTop = document.documentElement.scrollTop;
       const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
@@ -613,7 +579,6 @@
       document.getElementById("progressBar").style.width = scrollPercent + "%";
     });
 
-    // Back to Top Button
     const backToTop = document.getElementById("backToTop");
 
     window.addEventListener("scroll", () => {
@@ -628,7 +593,6 @@
       window.scrollTo({ top: 0, behavior: "smooth" });
     });
 
-    // Navbar shrink
     window.addEventListener("scroll", () => {
       if (window.scrollY > 80) {
         navbar.classList.add("shrink");
@@ -637,7 +601,6 @@
       }
     });
 
-    // Tilt Effect
     document.querySelectorAll(".tilt").forEach(card => {
       card.addEventListener("mousemove", (e) => {
         const rect = card.getBoundingClientRect();
